@@ -1,0 +1,13 @@
+.dialogs_block {
+    display: grid;
+    grid-template-columns: 2fr 4fr;
+
+}
+
+.dialogs_block .messages{
+    padding: 20px 0 0 20px
+}
+
+.scope {
+    border-right: 2px solid #68929826;
+}

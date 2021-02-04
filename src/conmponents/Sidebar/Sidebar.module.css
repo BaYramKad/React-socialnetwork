@@ -1,0 +1,59 @@
+.sidebar {
+  grid-area: n;
+  background-color: #70ffc145;
+  border-radius: 0 10px 10px 0;
+  padding: 1px 0 15px 0;
+}
+
+.item {
+  display: block;
+  color: #034577;
+  padding: 5px 0 5px 10px;
+  border-radius: 2px;
+  transition: 0.5s all;
+  width: 180px;
+}
+
+.item:hover {
+  background-color: #68929826;
+  color: #2f2222;
+  transition: 0.5s;
+}
+
+.active {
+  background-color: #68929826;
+  color: #1d008c;
+  width: 200px;
+  transition: 0.5s;
+  padding-left: 20px;
+  font-weight: 500;
+
+}
+
+.friends {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  text-align: center;
+  font-size: 13px;
+}
+
+.friends_block {
+  font-size: 13px;
+  margin-top: 10px;
+  background-color: #70ffc145;
+  border-radius: 0 10px 10px 0;
+}
+
+.str_friend {
+  padding: 10px 0 15px 10px;
+}
+.friendAvatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+}
+
+.name {
+  display: block;
+  margin: 3px 0 20px 0;
+}

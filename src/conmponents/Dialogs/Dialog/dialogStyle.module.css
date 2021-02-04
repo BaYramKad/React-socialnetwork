@@ -1,0 +1,28 @@
+.active{
+    background-color: #68929826;
+    border-left: 2px solid #2d2d2d;
+    color: #000000;
+    font-weight: 500;
+    transition: 0.2s all;
+}
+
+.dialog{
+    display: flex;
+    text-align: left;
+    padding: 10px;
+    transition: 0.2s all;
+    border-radius: 2px;
+    align-items: center;
+}
+
+.dialog:hover {
+    background-color: #68929812;
+    transition: 0.2s all;
+}
+
+.userAvatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    margin-right: 10px;
+}
