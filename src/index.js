@@ -1,7 +1,7 @@
 import React from 'react';
 import App from './App';
 import ReactDOM from 'react-dom';
-import store from "./data/state";
+import store from "./redux/state";
 import reportWebVitals from './reportWebVitals';
 
 const rerenderApplication = (store) => {

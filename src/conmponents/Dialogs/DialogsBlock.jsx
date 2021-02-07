@@ -2,7 +2,7 @@ import dialogsStyle from "./DialogsBlock.module.css";
 import React from "react"
 import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
-import { TYPE_ADD_MESSAGE, TYPE_UPDATE_TEXT_MESSAGE } from "./../../data/state"
+import { TYPE_ADD_MESSAGE, TYPE_UPDATE_TEXT_MESSAGE } from "./../../redux/dialogsReduser";
 
 const DialogsBlock = (props) => {
     
@@ -11,12 +11,12 @@ const DialogsBlock = (props) => {
 
     const refMessage = React.createRef();
     const addMessage = () => {
-        props.dispatchMessage(TYPE_ADD_MESSAGE());
+        props.dispatch(TYPE_ADD_MESSAGE());
     };
 
     const onChangeMessage = () => {
         const valueMessage = refMessage.current.value;
-        props.dispatchMessage(TYPE_UPDATE_TEXT_MESSAGE(valueMessage))
+        props.dispatch(TYPE_UPDATE_TEXT_MESSAGE(valueMessage))
     }
 
     return (
@@ -26,10 +26,13 @@ const DialogsBlock = (props) => {
                     { dialog }
                 </ul>
             </div>
+            
             <div className={dialogsStyle.messages}>
-                    { message }
-                <textarea onChange={onChangeMessage} value={props.textAreaDialog} ref={refMessage}></textarea>
-                <button onClick={addMessage}>send</button>
+                { message }
+                <div className={dialogsStyle.sendMessage}>
+                    <textarea onChange={onChangeMessage} placeholder="Send Message" value={props.textAreaDialog} ref={refMessage}></textarea>
+                    <button onClick={addMessage} className="button button-message">send</button>
+                </div>
             </div>
         </div>
     )

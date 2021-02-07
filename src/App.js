@@ -15,16 +15,13 @@ const App = (props) => {
                     <Route path="/profile" 
                             render={ () => <Profile dispatch={props.store.dispatch.bind(props.store)}
                                                     posts={props.store.appeal.bind(props.store)}
-                                                    textArea={props.store.appeal().profilePage.newPostText}
-                                                    countValue={props.store.countValue.bind(props.store)}/>
-                    }/>
+                                                    textArea={props.store.appeal().profilePage.newPostText}/>}/>
 
-                    <Route path="/dialogs"
-                           render={() => <DialogsBlock dialogsItems={props.store.appeal().dialogsPage.dialogsItems}
+                    <Route  path="/dialogs"
+                            render={() => <DialogsBlock dialogsItems={props.store.appeal().dialogsPage.dialogsItems}
                                             messagesItems={props.store.appeal().dialogsPage.messagesItems}
-                                            dispatchMessage={props.store.dispatchMessage.bind(props.store)}
-                                            textAreaDialog={props.store.appeal().dialogsPage.textMessage}/>
-                                }/>
+                                            dispatch={props.store.dispatch.bind(props.store)}
+                                            textAreaDialog={props.store.appeal().dialogsPage.textMessage}/>}/>
                 </div>
             </div>
         </BrowserRouter>

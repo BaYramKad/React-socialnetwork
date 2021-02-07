@@ -67,21 +67,3 @@ textarea {
   border-radius: 5px;
   resize: none;
 }
-
-.button_comment {
-  margin-top: 10px;
-  padding: 10px 30px; 
-  width: fit-content;
-  background-color: #2c9a85;
-  border-radius: 5px;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 500;
-  color: #fff;
-  transition: 0.2s;
-}
-
-.button_comment:hover {
-  background-color: #00836b;
-  transition: 0.2s;
-
-}

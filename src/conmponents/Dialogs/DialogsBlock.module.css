@@ -5,9 +5,15 @@
 }
 
 .dialogs_block .messages{
-    padding: 20px 0 0 20px
+    padding: 20px 0 0 20px;
 }
 
 .scope {
     border-right: 2px solid #68929826;
+}
+
+.sendMessage {
+    display: grid;
+    width: fit-content;
+    text-align: start;
 }
