@@ -34,15 +34,16 @@ const store = {
             textMessage: ""
         }
     },
+    appeal() {
+        return this._dataState;
+    },
     
     _rerenderApplication(){},
     
     renderObserser (observer){
         this._rerenderApplication = observer;
     },
-    appeal() {
-        return this._dataState;
-    },
+    
     _updateTextArea (message){
         this.appeal().profilePage.newPostText = message;
         this._rerenderApplication(this)

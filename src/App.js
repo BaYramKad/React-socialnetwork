@@ -1,31 +1,27 @@
 import './App.css';
 import Header from './conmponents/Header/Header';
-import Profile from './conmponents/Profile/Profile';
+import ProfileContainer from './conmponents/Profile/ProfileContainer';
 import Sidebar from './conmponents/Sidebar/Sidebar';
-import DialogsBlock from "./conmponents/Dialogs/DialogsBlock";
+import DialogsBlockContainer from "./conmponents/Dialogs/DialogsBlockContainer";
 import {Route, BrowserRouter} from "react-router-dom";
-
 const App = (props) => {
+    const state = props.store.appeal();
     return (
         <BrowserRouter>
             <div className="application">
                 <Header/>
-                <Sidebar userData={props.store.appeal()}/>
+                <Sidebar userData={state}/>
                 <div className="content">
                     <Route path="/profile" 
-                            render={ () => <Profile dispatch={props.store.dispatch.bind(props.store)}
+                            render={ () => <ProfileContainer dispatch={props.store.dispatch.bind(props.store)}
                                                     posts={props.store.appeal.bind(props.store)}
-                                                    textArea={props.store.appeal().profilePage.newPostText}/>}/>
-
+                                                    textAreaProfile={state.profilePage.newPostText}/>}/>
                     <Route  path="/dialogs"
-                            render={() => <DialogsBlock dialogsItems={props.store.appeal().dialogsPage.dialogsItems}
-                                            messagesItems={props.store.appeal().dialogsPage.messagesItems}
-                                            dispatch={props.store.dispatch.bind(props.store)}
-                                            textAreaDialog={props.store.appeal().dialogsPage.textMessage}/>}/>
+                            render={() => <DialogsBlockContainer />}/>
                 </div>
             </div>
         </BrowserRouter>
-    );
+    )
 };
 
 export default App;

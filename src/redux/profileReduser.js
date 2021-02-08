@@ -6,7 +6,6 @@ const addPostString = "ADD-POST";
 const updateTextString = "UPDATE-TEXT-AREA";
 
 const profileReduser = (state, action) => {
-
     switch(action.type) {
         case addPostString : 
             const addItemPost = {
