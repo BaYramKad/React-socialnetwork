@@ -13,9 +13,7 @@ const App = (props) => {
                 <Sidebar userData={state}/>
                 <div className="content">
                     <Route path="/profile" 
-                            render={ () => <ProfileContainer dispatch={props.store.dispatch.bind(props.store)}
-                                                    posts={props.store.appeal.bind(props.store)}
-                                                    textAreaProfile={state.profilePage.newPostText}/>}/>
+                            render={ () => <ProfileContainer />}/>
                     <Route  path="/dialogs"
                             render={() => <DialogsBlockContainer />}/>
                 </div>
