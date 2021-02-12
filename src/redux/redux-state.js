@@ -1,13 +1,15 @@
 import { combineReducers, createStore } from "redux";
 import profileReduser from "./profileReduser";
 import dialogsReduser from "./dialogsReduser";
+import usersReduser from "./usersReduser";
 
-const redusers = combineReducers({
-    // собирать все редьюсеры и этот метод чтобы отдать reduxStorу  npm i redux --save
+
+let redusers = combineReducers({
     profile: profileReduser,
-    dialogs: dialogsReduser
-});
+    dialogs: dialogsReduser,
+    usersPage: usersReduser
+})
 
-let storeRedux = createStore(redusers);
+let store = createStore(redusers);
 
-// export default storeRedux;
+export default store;

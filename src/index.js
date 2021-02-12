@@ -1,8 +1,18 @@
-import React from 'react';
+import React from "react"
 import App from './App';
 import ReactDOM from 'react-dom';
-import store from "./redux/state";
+import store from "./redux/redux-state";
 import reportWebVitals from './reportWebVitals';
+import {Provider} from "react-redux";
+
+ReactDOM.render(
+    <React.StrictMode>
+        <Provider store={store}>
+            <App/>
+        </Provider>
+    </React.StrictMode>, document.getElementById('root')
+);
+reportWebVitals()
 
 /* 
     Создание Контекста React 
@@ -16,19 +26,13 @@ import reportWebVitals from './reportWebVitals';
         { value => {function}}
     </MyContext.Consumer>
 */
-export const MyContext = React.createContext(store)
 
+// React.createContext(null)
+// React.createRef()
+// const redusers = {
 
-const rerenderApplication = (store) => {
-    ReactDOM.render(
-        <React.StrictMode>
-            <MyContext.Provider value={store} />
-                <App store={store}/>
-             <MyContext.Provider/>
-        </React.StrictMode>, document.getElementById('root')
-    );
-}
+// }
+// const redux = createStore(redusers)
 
-rerenderApplication(store)
-store.renderObserser(rerenderApplication)
-reportWebVitals()
+// Contexxt 
+//connect 

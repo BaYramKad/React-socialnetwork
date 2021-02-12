@@ -63,6 +63,14 @@ img {
     transition: 0.2s;
 }
 
+.button_unfolow {
+    background-color: #485a57;
+}
+
+.button_unfolow:hover {
+    background-color: #ccc;
+}
+
 .button:hover {
     background-color: #00836b;
     transition: 0.2s;

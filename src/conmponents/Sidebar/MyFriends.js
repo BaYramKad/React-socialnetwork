@@ -1,7 +1,6 @@
 import sidebarStyle from "./Sidebar.module.css";
 
-
-const mayFriends = (props) => {
+const MyFriends = (props) => {
     return (
         <div>
             <img className={sidebarStyle.friendAvatar} src={props.userImage}/>
@@ -10,4 +9,4 @@ const mayFriends = (props) => {
     )
 }
 
-export default mayFriends;
+export default MyFriends

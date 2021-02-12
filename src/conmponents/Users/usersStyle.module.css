@@ -1,0 +1,43 @@
+.imgUser {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 100%;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    margin: 25px;
+    padding-bottom: 17px;
+    border-bottom: 2px solid #16985f3d
+}
+.description {
+    display: flex;
+    flex-basis: 70%;
+    justify-content: space-between;
+    flex-grow: initial;
+    padding: 20px;
+    background-color: #16985f3d;
+    border-radius: 5px;
+}
+
+.location_user {
+    display: flex;
+    flex-direction: column;
+    text-align: end;
+}
+.status_user {
+    margin-top: 10px;
+}
+.infoUser {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-basis: 150px;
+}
+
+.name_user {
+    margin: 0;
+
+}
