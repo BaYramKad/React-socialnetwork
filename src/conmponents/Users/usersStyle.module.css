@@ -39,5 +39,8 @@
 
 .name_user {
     margin: 0;
+}
 
+.pagination {
+    font-weight: bold;
 }

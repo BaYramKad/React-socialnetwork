@@ -2,59 +2,14 @@
 import keanu_reeves from "./../img/userAvatar/keanu_reeves.jpg";
 const folow = "FOLOW";
 const unfolow = "UNFOLOW";
-const usersType = "USERS"
-let initialState = {
-    users: [
-        {
-            name: "Bayram",
-            folowed: false,
-            statusSub: "Unfolow",
-            id: 0,
-            status: "Helloooooo",
-            location: {
-                country: "Russia",
-                cityName: "Saint-Peterburg"
-            },
+const usersType = "USERS";
+const typeNumPage = "TYPE_NUM_PAGE";
 
-            imgUrl: keanu_reeves
-        },
-        {
-            name: "Nicolay",
-            folowed: true,
-            statusSub: "folow",
-            id: 1,
-            status: "welcome to my account",
-            location: {
-                country: "USA",
-                cityName: "NeyWork"
-            },
-            imgUrl: keanu_reeves
-        },
-        {
-            name: "Bayram",
-            folowed: false,
-            statusSub: "Unfolow",
-            id: 2,
-            status: "Helloooooo",
-            location: {
-                country: "Russia",
-                cityName: "Saint-Peterburg"
-            },
-            imgUrl: keanu_reeves
-        },
-        {
-            name: "Bayram",
-            folowed: true,
-            statusSub: "Folow",
-            id: 3,
-            status: "Thanks to folow me",
-            location: {
-                country: "Ucrine",
-                cityName: "Minsk"
-            },
-            imgUrl: keanu_reeves
-        }
-    ]
+let initialState = {
+    users: [],
+    totalCount: 55,
+    pageSize: 6,
+    currentPage: 1
 }
 
 const usersReduser = (state = initialState, action) => {
@@ -83,7 +38,12 @@ const usersReduser = (state = initialState, action) => {
         case usersType:
             return {
                 ...state,
-                users: [...state.users, ...action.users]
+                users: [...action.users]
+            }
+        case typeNumPage:
+            return {
+                ...state,
+                currentPage: action.currentPage
             }
         default:
             return state
@@ -94,5 +54,7 @@ const usersReduser = (state = initialState, action) => {
 
 export const usersFolowAC = (id) => ({ type: folow, userId: id})
 export const usersUnFolowAC = (id) => ({ type: unfolow, userId: id})
-export const setUsersAC = (users) => ({ type: usersType, users: users})
+export const setUsersAC = (users) => ({ type: usersType, users})
+export const setPageAC = (currentPage) => ({type: typeNumPage, currentPage})
+
 export default usersReduser;
