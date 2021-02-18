@@ -6,7 +6,7 @@ import Message from "./Message/Message";
 const DialogsBlock = (props) => {
     const dialogMap = props.dialogMap.map(item => <Dialog userImage={item.userImage} name={item.name}
                                                           id={`/dialogs/${item.id}`}/>)
-    const messageMap = props.messageMap.map(item => <Message message={item.message}/>)
+    const messageMap = props.messageMap.map(item => <Message  message={item.message}/>)
     return (
         <div className={dialogsStyle.dialogs_block}>
             <div className={dialogsStyle.scope}>

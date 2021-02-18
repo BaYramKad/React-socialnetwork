@@ -1,8 +1,40 @@
-.header img {
-    width: 82px;
-}
+
 
 .header {
     grid-area: h;
     background-color: #70ffc145;
 }
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header_block button{
+    display: flex;
+    margin: 10px;
+}
+
+.sing_button {
+    color: white;
+}
+
+
+.headerLogo {
+    width: 60px;
+}
+.userImg {
+    width: 42px;
+    border-radius: 100%;
+    margin-right: 8px;
+    border: 2px solid #fff;
+}
+.userAvatar {
+    display: flex;
+}
+.userLogin {
+    padding: 10px
+}
+
+

@@ -3,6 +3,13 @@
   background-color: #70ffc145;
   border-radius: 0 10px 10px 0;
   padding: 1px 0 15px 0;
+
+}
+
+.sidebar_block {
+  position: sticky;
+  height: fit-content;
+  top: 0;
 }
 
 .item {

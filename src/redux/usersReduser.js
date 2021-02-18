@@ -1,60 +1,116 @@
+import {getApiData} from "../api/api";
 
-import keanu_reeves from "./../img/userAvatar/keanu_reeves.jpg";
-const folow = "FOLOW";
+const folowType = "FOLOW";
 const unfolow = "UNFOLOW";
 const usersType = "USERS";
 const typeNumPage = "TYPE_NUM_PAGE";
+const typeToggleIsFetching = "TYPE_TOGGLE_IS_FETCHING";
+const typeToggleIsDisabledProgress = "TYPE_TOGGLE_IS_DISABLED_PROGRESS";
 
 let initialState = {
     users: [],
-    totalCount: 55,
-    pageSize: 6,
-    currentPage: 1
+    totalUsersCount: 50,
+    countUser: 4,
+    currentPage: 1,
+    preloader: true,
+    disableProgress: []
 }
 
 const usersReduser = (state = initialState, action) => {
-    switch (action.type){
-        case folow:
-        return {
+    switch (action.type) {
+        case folowType:
+            return {
                 ...state,
-                users: state.users.map( item => {
+                users: state.users.map(item => {
                     if (action.userId === item.id) {
-                        return { ...item, folowed: true}
+                        return {...item, followed: true}
                     }
                     return item
                 })
-        }
+            }
         case unfolow:
             return {
                 ...state,
-                users: state.users.map( item => {
+                users: state.users.map(item => {
                     if (action.userId === item.id) {
-                        return { ...item, folowed: false}
+                        return {...item, followed: false}
                     }
                     return item
                 })
             }
-
         case usersType:
-            return {
-                ...state,
-                users: [...action.users]
-            }
+            return {...state, users: [...action.users]}
         case typeNumPage:
+            return {...state, currentPage: action.currentPage}
+        case typeToggleIsFetching:
+            return {...state, preloader: action.toggleBoolean}
+        case typeToggleIsDisabledProgress:
             return {
                 ...state,
-                currentPage: action.currentPage
+                disableProgress: action.isDisabled
+                    ? [...state.disableProgress, action.userId]
+                    : state.disableProgress.filter(id => id !== action.userId)
             }
         default:
             return state
     }
+}
 
+const folow = (id) => ({type: folowType, userId: id})
+const unFolow = (id) => ({type: unfolow, userId: id})
+const setUsers = (users) => ({type: usersType, users})
+const setPage = (currentPage) => ({type: typeNumPage, currentPage})
+const toggleIsFetching = (toggleBoolean) => ({type: typeToggleIsFetching, toggleBoolean})
+const toggleIsDisabledProgress = (isDisabled, userId) => ({
+    type: typeToggleIsDisabledProgress,
+    isDisabled,
+    userId
+})
+
+
+export const thunkFolow = (userId) => (dispatch) => {
+    dispatch(toggleIsDisabledProgress(true, userId))
+    getApiData.postFollow(userId).then(response => {
+        if (response === 0) {
+            dispatch(folow(userId))
+            dispatch(toggleIsDisabledProgress(false, userId))
+        }
+    })
+}
+
+ export const thunkUnFolow = (userId) => (dispatch) => {
+    dispatch(toggleIsDisabledProgress(true, userId))
+    getApiData.deleteFolow(userId).then(response => {
+        if (response === 0) {
+            dispatch(unFolow(userId))
+            dispatch(toggleIsDisabledProgress(false, userId))
+        }
+    })
+}
+
+export const toggleThunkIsFetching = (countUser, currentPage) => (dispatch) => {
+    dispatch(toggleIsFetching(true))
+    getApiData.getUsers(countUser, currentPage)
+        .then( items => {
+            dispatch(toggleIsFetching(false))
+            dispatch(setUsers(items))
+        })
+}
+
+export const toggleThunkIsPage = (countUser, currentPage) => (dispatch) => {
+    dispatch(toggleIsFetching(true))
+    getApiData.getUsers(countUser, currentPage)
+        .then( items => {
+            dispatch(toggleIsFetching(false))
+            dispatch(setUsers(items))
+            dispatch(setPage(currentPage))
+        })
 }
 
 
-export const usersFolowAC = (id) => ({ type: folow, userId: id})
-export const usersUnFolowAC = (id) => ({ type: unfolow, userId: id})
-export const setUsersAC = (users) => ({ type: usersType, users})
-export const setPageAC = (currentPage) => ({type: typeNumPage, currentPage})
+
+
+
+
 
 export default usersReduser;

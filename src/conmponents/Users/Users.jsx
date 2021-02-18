@@ -1,76 +1,68 @@
 import usersStyle from "./usersStyle.module.css"
 import user from "../../img/userAvatar/user.png";
-import * as axios from "axios";
 import * as React from "react";
+import Preloader from "./Preloader/Preloader";
+import {NavLink} from "react-router-dom";
 
-class Users extends React.Component {
-    componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=10&page=${this.props.currentPage}`)
-            .then(response => {
-                console.log(response)
-                this.props.setUsers(response.data.items)
-                console.log(response)
-                // this.props.setCountPage(response.data.totalCount)
-            })
+const Users = (props) => {
+
+    const pages = Math.ceil(props.totalUsersCount / props.countUser)
+    const page = []
+
+    for (let i = 1; i <= pages; i++) {
+        page.push(i)
     }
 
-    onPageChanged(currentPage) {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=10&page=${currentPage}`)
-            .then(response => {
-                this.props.setUsers(response.data.items)
-                this.props.setPage(currentPage)
-            })
-    }
+    return <div>
+        <h1 className={usersStyle.title_h1}>Users</h1>
+        <Preloader preloader={props.preloader}/>
 
-    render() {
-        const pages = Math.ceil(100 / 10)
-        const page = []
-
-        for (let i = 1; i <= pages; i++) {
-            page.push(i)
+        {
+            props.users.map(item => (
+                <section className={usersStyle.content}>
+                    <div className={usersStyle.infoUser}>
+                        <NavLink to={`profile/${item.id}`}>
+                            <img className={usersStyle.imgUser} src={item.photos.small || item.photos.large || user}
+                                 alt="imgUser"/>
+                        </NavLink>
+                        {
+                            item.followed ?
+                                <button disabled={props.disableProgress.some(i => i === item.id)} onClick={() => {
+                                    props.thunkUnFolow(item.id)
+                                }} className="button button_unfolow">Unfolow</button>
+                                : <button disabled={props.disableProgress.some(i => i === item.id)} onClick={() => {
+                                    props.thunkFolow(item.id)
+                                }} className="button">Folow</button>
+                        }
+                    </div>
+                    <div className={usersStyle.description}>
+                        <div>
+                            <h1 className={usersStyle.name_user}>{item.name}</h1>
+                            <p className={usersStyle.status_user}>{item.status}</p>
+                        </div>
+                        <div className={usersStyle.location_user}>
+                            <span>Saint Petersburg </span>
+                            <span>Russia</span>
+                        </div>
+                    </div>
+                </section>
+            ))
         }
 
-        return <div>
-                <div>
-                    {
-                        page.map( item => {
-                            return <span onClick={ () => this.onPageChanged(item)} className={ this.props.currentPage === item && usersStyle.pagination }>{ item }</span>
-                        })
-                    }
-                </div>
-                {
-                    this.props.users.map(item => (
-                        <section className={usersStyle.content}>
-                            <div className={usersStyle.infoUser}>
-                                <img className={usersStyle.imgUser} src={user} alt=""/>
-                                {
-                                    item.folowed ? <button onClick={() => this.props.unFolow(item.id)}
-                                                           className="button button_unfolow">Unfolow</button>
-                                        : <button onClick={() => this.props.folow(item.id)} className="button">Folow</button>
-                                }
-                            </div>
-                            <div className={usersStyle.description}>
-                                <div>
-                                    <h1 className={usersStyle.name_user}>{item.name}</h1>
-                                    <p className={usersStyle.status_user}>{item.status}</p>
-                                </div>
-                                <div className={usersStyle.location_user}>
-                            <span>
-                                {"item.location.country"}
-                            </span>
-                                    <span>
-                                {"item.location.cityName"}
-                            </span>
-                                </div>
-                            </div>
-                        </section>
-                    ))
-                }
+        <Preloader preloader={props.preloader}/>
+        <div className={usersStyle.pag_content}>
+            <div className={usersStyle.pag_block}>
 
+                {
+                    page.map(item => {
+                        return <span onClick={() => props.onPageChanged(item)}
+                                     className={props.currentPage === item && usersStyle.pagination}>{item}</span>
+                    })
+                }
             </div>
 
-
-    }
+        </div>
+    </div>
 }
 
 export default Users

@@ -43,7 +43,7 @@ const dialogsRed = (state = initialState, action) => {
     }
 };
 
-export const TYPE_ADD_MESSAGE = () => ({type: typeAddStringMessage});
-export const TYPE_UPDATE_TEXT_MESSAGE = text => ({type: typeUpdateStringMessage, text: text});
+export const addMessage = () => ({type: typeAddStringMessage});
+export const updateTextMessage = (text) => ({type: typeUpdateStringMessage, text: text});
 
 export default dialogsRed;

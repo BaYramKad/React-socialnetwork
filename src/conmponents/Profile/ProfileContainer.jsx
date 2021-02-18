@@ -1,7 +1,17 @@
-import Post from "./myPosts/Post";
-import {ADD_POST, UPDATE_TEXT} from "../../redux/profileReduser";
+import {
+    addNewPost,
+    changeText,
+    getProfileStatus,
+    getProfileThunk,
+    updateProfileStatus,
+    changeProfileStatus, updateStatusProfile
+} from "../../redux/profileReduser";
 import Profile from "./Profile";
 import {connect} from "react-redux";
+import * as React from "react";
+import {withRouter} from "react-router";
+import withOrderComponent from "../Redirect/RedirectComponent";
+import {compose} from "redux";
 
 
 // import { MyContext } from "../..";
@@ -27,25 +37,38 @@ import {connect} from "react-redux";
 //   </MyContext.Consumer
 // };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        changeText: function (event) {
-            let text = UPDATE_TEXT(event.target.value)
-            dispatch(text)
-        },
-        addNewPost: function () {
-            dispatch(ADD_POST())
+
+class ProfileComponentAPI extends React.Component {
+    componentDidMount() {
+        let userId = this.props.match.params.userId;
+        if (!userId) {
+            userId = 2;
         }
+        this.props.getProfileThunk(userId)
+        this.props.getProfileStatus(userId)
+    }
+
+    changeText(event) {
+        this.props.changeText(event.target.value)
+    }
+
+
+    render() {
+        return <Profile {...this.props}/>
     }
 }
 
 const mapStateToProps = (state) => {
     return {
         postInfo: state.profile.postInfo,
-        newPostText: state.profile.newPostText
+        newPostText: state.profile.newPostText,
+        userData: state.profile.userData,
+        status: state.profile.status,
     }
 }
 
-
-const ConnectBlockProfile = connect(mapStateToProps, mapDispatchToProps)(Profile)
-export default ConnectBlockProfile;
+export default compose(
+    connect(mapStateToProps, {changeText, getProfileThunk, getProfileStatus, changeProfileStatus,updateStatusProfile, addNewPost}),
+    withRouter,
+    withOrderComponent
+)(ProfileComponentAPI)

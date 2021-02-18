@@ -1,8 +1,8 @@
 import React from "react"
-import {TYPE_ADD_MESSAGE, TYPE_UPDATE_TEXT_MESSAGE} from "../../redux/dialogsReduser";
+import {addMessage, updateTextMessage} from "../../redux/dialogsReduser";
 import DialogsBlock from "./DialogsBlock";
 import {connect} from "react-redux";
-
+import withOrderComponent from "../Redirect/RedirectComponent";
 // const DialogsBlockContainer = () => {
 
 //     return <MyContext.Consumer>
@@ -23,25 +23,31 @@ import {connect} from "react-redux";
 //         }}
 //     </MyContext.Consumer>
 // }
-
+class getDialogsComponent extends React.Component {
+    render() {
+        return <DialogsBlock {...this.props} />
+    }
+}
 const mapStateToProps = (state) => {
     return {
         dialogMap: state.dialogs.dialogsItems,
         messageMap: state.dialogs.messagesItems,
-        textAreaDialog: state.dialogs.textMessage
+        textAreaDialog: state.dialogs.textMessage,
+        isAuth: state.auth.isAuth
     }
 }
-
 const mapDispatchToProps = (dispatch) => {
     return {
         onChangeMessage: (e) => {
-            dispatch(TYPE_UPDATE_TEXT_MESSAGE(e.target.value))
+            const text = e.target.value
+            dispatch(updateTextMessage(text))
         },
         addMessage: () => {
-            dispatch(TYPE_ADD_MESSAGE())
+            dispatch(addMessage())
         }
     }
 }
+// Hight Order Component
+const HightOrderComponent = withOrderComponent(getDialogsComponent)
 
-const DialogsBlockContainer = connect(mapStateToProps, mapDispatchToProps)(DialogsBlock)
-export default DialogsBlockContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(HightOrderComponent)

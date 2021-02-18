@@ -21,7 +21,6 @@
   padding-right: 30px;
   background-color: #fff;
   border-radius: 50px;
-  width: fit-content;
   position: relative;
   bottom: 3rem;
 }
@@ -56,7 +55,7 @@
   width: 710px;
 }
 
-textarea {
+.postTextAria {
   font-family: Segoe UI, "Tahoma", Geneva, Verdana, sans-serif;
   outline: none;
   border: none;
@@ -66,4 +65,33 @@ textarea {
   height: 100px;
   border-radius: 5px;
   resize: none;
+}
+
+
+
+.contacts_networks a {
+  display: flex;
+  justify-content: flex-end;
+}
+.status {
+  font-family: Segoe UI, "Tahoma", Geneva, Verdana, sans-serif;
+  outline: none;
+  width: 300px;
+  resize: none;
+  border-radius: 2px;
+  border: 0;
+}
+
+.status:hover {
+  cursor: pointer;
+  background-color: #ccc;
+}
+.inputProfile {
+  font-family: Segoe UI, "Tahoma", Geneva, Verdana, sans-serif;
+  outline: none;
+  background-color: #70ffc145;
+  width: 300px;
+  border-radius: 2px;
+  resize: none;
+  border: 0;
 }

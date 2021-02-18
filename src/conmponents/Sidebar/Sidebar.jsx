@@ -5,7 +5,7 @@ const Sidebar = (props) => {
     // debugger
     const friends = props.dialogs.map( item => <MayFriends userImage={item.userImage} name={item.name}/>)
     return (
-        <div>
+        <div className={sidebarStyle.sidebar_block}>
             <nav className={sidebarStyle.sidebar}>
                 <ul>
                     <li><NavLink className={sidebarStyle.item} activeClassName={sidebarStyle.active} to="/profile">Profile</NavLink></li>
