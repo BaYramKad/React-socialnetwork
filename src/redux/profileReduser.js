@@ -11,6 +11,7 @@ const updateUserProfile = "UPDATE_USER_PROFILE"
 const setUserStatus = "SET_USER_STATUS"
 const upadateStatus = "UPDATE_STATUS"
 const STATUS = "STATUS"
+
 let initialState = {
     postInfo: [
         {
@@ -50,7 +51,6 @@ let initialState = {
 }
 
 const profileReduser = (state = initialState, action) => {
-    console.log(state)
     switch (action.type) {
         case addPostString :
             if (state.newPostText) {
@@ -61,7 +61,7 @@ const profileReduser = (state = initialState, action) => {
                     nameUser: "Anna",
                     countLike: 0,
                     countDislike: 0,
-                    postText: state.newPostText,
+                    postText: action.text,
                     id: 1
                 }
                 return {
@@ -103,8 +103,8 @@ const profileReduser = (state = initialState, action) => {
 
 };
 
-export const addNewPost = () => ({type: addPostString});
-export const changeText = (text) => ({type: updateTextString, text: text});
+export const addNewPost = (text) => ({type: addPostString, text});
+export const changeText = (text) => ({type: updateTextString, text});
 export const setProfileUser = (userData) => ({type: updateUserProfile, userData})
 export const setStatusUser = (status) => ({type: setUserStatus, status})
 export const changeProfileStatus = (text) => ({type: upadateStatus, text})
@@ -124,7 +124,6 @@ export const updateStatusProfile = (status) => (dispatch) => {
     getApiData.updateStatus(status)
         .then(response => {
             if (response.data.resultCode === 0) {
-                debugger
                 dispatch(setStatus(status))
             }
         })

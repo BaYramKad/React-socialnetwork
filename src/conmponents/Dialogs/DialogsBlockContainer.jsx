@@ -38,12 +38,8 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        onChangeMessage: (e) => {
-            const text = e.target.value
-            dispatch(updateTextMessage(text))
-        },
-        addMessage: () => {
-            dispatch(addMessage())
+        addMessage: (text) => {
+            dispatch(addMessage(text))
         }
     }
 }

@@ -33,7 +33,7 @@ export const getApiData = {
         return axiosDefault.get(`profile/status/${id}`).then(response => response.data)
     },
     updateStatus: (status) => {
-        return axiosDefault.put(`profile/status/2`, { status: status} )
+        return axiosDefault.put(`profile/status/`, { status: status} )
     }
 }
 

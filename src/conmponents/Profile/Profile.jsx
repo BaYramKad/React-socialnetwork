@@ -3,35 +3,46 @@ import AccountUser from "./AccountUser";
 import React from "react"
 import Post from "./myPosts/Post";
 import Preloader from "../Users/Preloader/Preloader";
-import {updateTextProfile} from "../../redux/profileReduser";
+import {Field, reduxForm} from "redux-form";
+import {requireForm} from "../../validate/validateForm"
 
-class Profile extends React.Component{
+const Profile = (props) => {
 
-
-    render() {
-        if (!this.props.userData) {
-            return <Preloader/>
-        }
-        return (
-            <section>
-                <div>
-                    <AccountUser {...this.props.userData} status={this.props.status} changeProfileStatus={this.props.changeProfileStatus}
-                                 updateStatusProfile={this.props.updateStatusProfile}/>
-                </div>
-                <div className={profileStyle.position}>
-                    <div>
-                        <h1>My Posts</h1>
-                        <textarea className={profileStyle.postTextAria} placeholder="What's new ?" onChange={this.props.changeText} value={this.props.newPostText}>
-                            </textarea>
-                        <div className={profileStyle.comment_post}>
-                            <button onClick={this.props.addNewPost} className="button">send</button>
-                        </div>
-                    </div>
-                    <Post postInfo={this.props.postInfo}/>
-                </div>
-            </section>
-        );
+    const onSubmit = (postText) => {
+        props.addNewPost(postText.postText)
     }
-};
 
+    if (!props.userData) {
+        return <Preloader/>
+    }
+    return (
+        <section>
+            <div>
+                <AccountUser {...props.userData} status={props.status}
+                             changeProfileStatus={props.changeProfileStatus}
+                             updateStatusProfile={props.updateStatusProfile}/>
+            </div>
+            <div className={profileStyle.position}>
+                <div>
+                    <h1>My Posts</h1>
+                    <ProfilePostReduxForm {...props} onSubmit={onSubmit}/>
+                </div>
+                <Post postInfo={props.postInfo}/>
+            </div>
+        </section>
+    );
+}
+
+const ProfilePost = (props) => {
+    return <form onSubmit={props.handleSubmit}>
+        <Field component="textarea" type="text" name="postText" className={profileStyle.postTextAria}
+               placeholder="What's new ?"
+                validate={[requireForm]}> </Field>
+        <div className={profileStyle.comment_post}>
+            <button className="button">send</button>
+        </div>
+    </form>
+}
+
+const ProfilePostReduxForm = reduxForm({form: "ProfilePost"})(ProfilePost)
 export default Profile;

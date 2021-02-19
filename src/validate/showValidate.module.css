@@ -1,0 +1,7 @@
+.error small{
+    color: red;
+    margin-left: 10px;
+}
+.error textarea {
+    border: 2px solid red;
+}

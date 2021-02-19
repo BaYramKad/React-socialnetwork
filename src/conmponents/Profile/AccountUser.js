@@ -70,9 +70,6 @@ class AccountUser extends React.Component {
 
                          </div>
                      </div>
-
-
-
             </div>
         )
     }

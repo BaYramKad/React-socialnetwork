@@ -54,7 +54,7 @@ class ProfileComponentAPI extends React.Component {
 
 
     render() {
-        return <Profile {...this.props}/>
+        return <Profile {...this.props} addNewPost={this.props.addNewPost}/>
     }
 }
 
