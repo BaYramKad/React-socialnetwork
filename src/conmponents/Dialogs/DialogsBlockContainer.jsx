@@ -26,10 +26,12 @@ import {getDialogsItems, getMessages, getTextPost} from "../../Selector/dialogsB
 // }
 class getDialogsComponent extends React.Component {
     render() {
+
         return <DialogsBlock {...this.props} />
     }
 }
 const mapStateToProps = (state) => {
+
     return {
         dialogMap: getDialogsItems(state),
         messageMap: getMessages(state),

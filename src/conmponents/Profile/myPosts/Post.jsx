@@ -6,7 +6,7 @@ const Post = (props) => {
         <div>
             {
                 props.postInfo.map(item => (
-                    <div className={postStyle.post}>
+                    <div key="0" className={postStyle.post}>
                         <img className={postStyle.post_avatar} src={item.postImg} alt="userAvatar"/>
                         <div>
                             <h4 className={postStyle.user_name}>{item.nameUser}</h4>

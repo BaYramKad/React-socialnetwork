@@ -1,4 +1,5 @@
 import {getApiData} from "../api/api";
+import {act} from "@testing-library/react";
 
 const folowType = "FOLOW";
 const unfolow = "UNFOLOW";
@@ -13,7 +14,7 @@ let initialState = {
     countUser: 4,
     currentPage: 1,
     preloader: true,
-    disableProgress: []
+    disableProgress: [],
 }
 
 const usersReduser = (state = initialState, action) => {

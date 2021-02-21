@@ -22,11 +22,13 @@ class UsersAPIConnect extends React.Component {
     }
 
     render() {
+        console.log("RENDER")
         return <Users {...this.props} onPageChanged={this.onPageChanged}/>
     }
 }
 
 const mapStateToProps = (state) => {
+    console.log("MAPSTATE TO PROPS")
     return {
         users: getUsersPage(state),
         totalUsersCount: getTotalUsersCount(state),
