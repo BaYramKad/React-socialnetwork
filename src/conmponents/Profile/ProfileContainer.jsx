@@ -12,6 +12,7 @@ import * as React from "react";
 import {withRouter} from "react-router";
 import withOrderComponent from "../Redirect/RedirectComponent";
 import {compose} from "redux";
+import {getNewPostText, getPostInfo, getStatus, getUserData, getUserId} from "../../Selector/profilePageSelector";
 
 
 // import { MyContext } from "../..";
@@ -42,7 +43,7 @@ class ProfileComponentAPI extends React.Component {
     componentDidMount() {
         let userId = this.props.match.params.userId;
         if (!userId) {
-            userId = 2;
+            userId = this.props.id;
         }
         this.props.getProfileThunk(userId)
         this.props.getProfileStatus(userId)
@@ -60,10 +61,11 @@ class ProfileComponentAPI extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        postInfo: state.profile.postInfo,
-        newPostText: state.profile.newPostText,
-        userData: state.profile.userData,
-        status: state.profile.status,
+        postInfo: getPostInfo(state),
+        newPostText: getNewPostText(state),
+        userData: getUserData(state),
+        status: getStatus(state),
+        id: getUserId(state)
     }
 }
 

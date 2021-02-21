@@ -2,8 +2,15 @@ import {connect} from "react-redux";
 import Users from "./Users";
 import {thunkFolow, thunkUnFolow, toggleThunkIsFetching, toggleThunkIsPage} from "../../redux/usersReduser";
 import * as React from "react";
-import withOrderComponent from "../Redirect/RedirectComponent";
 import {compose} from "redux";
+import {
+    disableProgress,
+    getCountUser,
+    getCurrentPage,
+    getPreloader,
+    getTotalUsersCount,
+    getUsersPage
+} from "../../Selector/usersPageSelector";
 
 class UsersAPIConnect extends React.Component {
     componentDidMount() {
@@ -21,12 +28,12 @@ class UsersAPIConnect extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        users: state.usersPage.users,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        countUser: state.usersPage.countUser,
-        currentPage: state.usersPage.currentPage,
-        preloader: state.usersPage.preloader,
-        disableProgress: state.usersPage.disableProgress
+        users: getUsersPage(state),
+        totalUsersCount: getTotalUsersCount(state),
+        countUser: getCountUser(state),
+        currentPage: getCurrentPage(state),
+        preloader: getPreloader(state),
+        disableProgress: disableProgress(state)
     }
 }
 
@@ -36,6 +43,5 @@ export default compose(
         toggleThunkIsPage,
         thunkFolow,
         thunkUnFolow
-    }),
-    withOrderComponent
+    })
 )(UsersAPIConnect)

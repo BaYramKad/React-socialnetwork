@@ -26,11 +26,12 @@ class AccountUser extends React.Component {
             status: this.props.changeProfileStatus(text)
         })
     }
+
     componentDidUpdate(prevProps, prevState) {
         if (prevState.status !== this.props.status) {
             this.setState({
                 status: this.props.status
-            } )
+            })
         }
     }
 
@@ -40,36 +41,39 @@ class AccountUser extends React.Component {
                 <img className={profileStyle.content_img}
                      src="https://cs10.pikabu.ru/post_img/big/2018/07/02/11/1530555134117293047.jpg"/>
 
-                     <div className={profileStyle.sectionUser}>
-                         <div className={profileStyle.description}>
-                             <img className={profileStyle.content_avatar}
-                                  src={this.props.photos.small ? this.props.photos.small : user}/>
-                             <div className={profileStyle.info}>
-                                 <h1>{this.props.fullName}</h1>
-                                 <div className={profileStyle.changeStatus}>
-                                     {!this.state.isStatus && <textarea  placeholder="Изменить статус" value={this.props.status} className={profileStyle.status}
-                                                                  onClick={this.usStatusTrue}> </textarea>}
-                                     {this.state.isStatus && <textarea className={profileStyle.inputProfile}
-                                                                        autoFocus={true} value={this.props.status}
-                                                                        onChange={this.changeText} onBlur={this.diActivetedStatus}>
+                <div className={profileStyle.sectionUser}>
+                    <div className={profileStyle.description}>
+                        <img className={profileStyle.content_avatar}
+                             src={this.props.photos.small ? this.props.photos.small : user}/>
+                        <div className={profileStyle.info}>
+                            <h1>{this.props.fullName}</h1>
+                            <div className={profileStyle.changeStatus}>
+                                {!this.state.isStatus &&
+                                <textarea placeholder="Изменить статус" value={this.props.status}
+                                          className={profileStyle.status}
+                                          onClick={this.usStatusTrue}> </textarea>}
+                                {this.state.isStatus && <textarea className={profileStyle.inputProfile}
+                                                                  autoFocus={true} value={this.props.status}
+                                                                  onChange={this.changeText}
+                                                                  onBlur={this.diActivetedStatus}>
                         </textarea>}
-                                 </div>
-                                 <p>Saint Petersburg 20 years</p>
-                                 <small>{this.props.aboutMe}</small>
-                                 {
-                                     this.props.lookingForAJob ? <p>Ищу работу</p> : <p>Не ищу работу</p>
-                                 }
+                            </div>
+                            <p>Saint Petersburg 20 years</p>
+                            <small>{this.props.aboutMe}</small>
+                            {
+                                this.props.lookingForAJob ? <p>Ищу работу</p> : <p>Не ищу работу</p>
+                            }
 
-                             </div>
-                             <div className={profileStyle.contacts_networks}>
-                                 <a href="#">{this.props.contacts.facebook}</a>
-                                 <a href="#">{this.props.contacts.website}</a>
-                                 <a href="#">{this.props.contacts.vk}</a>
-                                 <a href="#">{this.props.contacts.instagram}</a>
-                             </div>
+                        </div>
+                        <div className={profileStyle.contacts_networks}>
+                            <a href="#">{this.props.contacts.facebook}</a>
+                            <a href="#">{this.props.contacts.website}</a>
+                            <a href="#">{this.props.contacts.vk}</a>
+                            <a href="#">{this.props.contacts.instagram}</a>
+                        </div>
 
-                         </div>
-                     </div>
+                    </div>
+                </div>
             </div>
         )
     }

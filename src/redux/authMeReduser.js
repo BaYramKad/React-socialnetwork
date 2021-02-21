@@ -1,5 +1,5 @@
-import {getApiData} from "../api/api";
-import {act} from "@testing-library/react";
+import {authDataApi, getApiData} from "../api/api";
+import {stopSubmit} from "redux-form";
 
 const typeAuthMe = "TYPE_AUTH_ME";
 const typeAuthMePhoto = "TYPE_AUTH_ME_PHOTO"
@@ -12,13 +12,13 @@ const initialState = {
     photoUser: null
 }
 
+
 const authReduserMe = (state = initialState, action) => {
     switch (action.type) {
         case typeAuthMe:
             return {
                 ...state,
-                ...action.dataAuth,
-                isAuth: action.dataAuth.email ? true : false
+                ...action.dataAuth
             }
         case typeAuthMePhoto:
             return {
@@ -30,19 +30,49 @@ const authReduserMe = (state = initialState, action) => {
     }
 };
 
-export const connectAuthUser = (email, id, login) => ({type: typeAuthMe, dataAuth: {email, id, login}});
+export const connectAuthUser = (email, id, login, isAuth) => ({type: typeAuthMe, dataAuth: {email, id, login, isAuth}});
 export const getUserPhotoId = (photo) => ({type: typeAuthMePhoto, photo});
 
 export const connectThunkUserMe = () => (dispatch) => {
-    getApiData.authMe().then(response => {
-        const {email, id, login} = response
-        dispatch(connectAuthUser(email, id, login))
+    return authDataApi.authMe().then(response => {
+        const {email, id, login} = response.data
+        if (response.resultCode === 0) {
+            dispatch(connectAuthUser(email, id, login, true))
+        }
     })
 }
 
 export const getUserPhoto = (id) => (dispatch) => {
-    getApiData.getProfileUser(id).then(response => {
-        dispatch(getUserPhotoId(response.photos.small))
+    getApiData.getProfileUser(id)
+        .then(response => {
+                if (response.resultCode === 0) {
+                    dispatch(getUserPhotoId(response.photos.small))
+                }
+            }
+        )
+}
+
+export const loginFormMe = (email, password, rememberMe) => (dispatch) => {
+    authDataApi.loginMe(email, password, rememberMe)
+        .then(response => {
+            if (response.resultCode === 0) {
+                dispatch(connectThunkUserMe())
+            } else {
+                const messageError = response.messages.length > 0 ? response.messages[0] : "Some error"
+                dispatch(stopSubmit("Login", {_error: messageError}))
+            }
+
+        })
+}
+
+export const loginOutFormMe = () => (dispatch) => {
+    authDataApi.logOutMe().then(response => {
+        if (response.resultCode === 0) {
+            dispatch(connectAuthUser(null, null, null, false))
+        }
     })
 }
+
 export default authReduserMe;
+
+//  dispatch(stopSubmit("Login", {password: "error"}))

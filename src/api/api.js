@@ -22,10 +22,6 @@ export const getApiData = {
     deleteFolow: (id) => {
         return axiosDefault.delete(`follow/${id}`).then(response => response.data.resultCode)
     },
-
-    authMe: () => {
-        return axiosDefault.get(`auth/me`).then(response => response.data.data)
-    },
     getProfileUser: (id) => {
         return axiosDefault.get(`profile/${id}`).then(response => response.data)
     },
@@ -35,5 +31,15 @@ export const getApiData = {
     updateStatus: (status) => {
         return axiosDefault.put(`profile/status/`, { status: status} )
     }
+}
+
+export const authDataApi = {
+    authMe: () => {return axiosDefault.get(`auth/me`).then(response => response.data)},
+
+    loginMe: (email, password, rememberMe) => {
+        return axiosDefault.post(`auth/login`, {email, password, rememberMe})
+            .then(response => response.data)
+    },
+    logOutMe: () => {return axiosDefault.delete(`auth/login`).then(response => response.data)}
 }
 

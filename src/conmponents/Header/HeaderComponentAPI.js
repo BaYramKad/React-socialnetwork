@@ -1,15 +1,19 @@
 import * as React from "react";
 import Header from "./Header";
 import {connect} from "react-redux";
-import {connectThunkUserMe, getUserPhoto} from "../../redux/authMeReduser";
+import {connectThunkUserMe, getUserPhoto, loginOutFormMe} from "../../redux/authMeReduser";
 import {withRouter} from "react-router";
+import {getIsAuth} from "../../Selector/loginPageSelector";
+import {getUserId} from "../../Selector/profilePageSelector";
+import {getEmail, getLogin, getPhoto} from "../../Selector/headerSelector";
 
 class HeaderComponentAuth extends React.Component {
+
     componentDidMount() {
         this.props.connectThunkUserMe()
         let userId = this.props.match.params.userId;
         if (!userId) {
-            userId = 2;
+            userId = this.props.id
         }
         this.props.getUserPhoto(userId)
     }
@@ -21,14 +25,13 @@ class HeaderComponentAuth extends React.Component {
 
 const matStateToProps = (state) => {
     return {
-        email: state.auth.email,
-        id: state.auth.id,
-        login: state.auth.login,
-        isAuth: state.auth.isAuth,
-        photoUser: state.auth.photoUser
+        email: getEmail(state),
+        id: getUserId(state),
+        login: getLogin(state),
+        isAuth: getIsAuth(state),
+        photoUser: getPhoto(state)
     }
 }
 
 const HeaderComponenUseRouter = withRouter(HeaderComponentAuth)
-
-export default connect(matStateToProps, {connectThunkUserMe, getUserPhoto})(HeaderComponenUseRouter)
+export default connect(matStateToProps, {connectThunkUserMe, getUserPhoto, loginOutFormMe})(HeaderComponenUseRouter)

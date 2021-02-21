@@ -1,5 +1,6 @@
 import headStyle from "./Header.module.css";
 import logoImg from "../../logo.svg"
+import logodefault from "./../../img/userAvatar/user.png"
 import {NavLink} from "react-router-dom";
 
 const Header = (props) => {
@@ -10,8 +11,12 @@ const Header = (props) => {
             </div>
             <div>
                 {props.isAuth
-                    ? <div className={headStyle.userAvatar}><strong className={headStyle.userLogin}>{props.login}</strong>
-                        <img className={headStyle.userImg} src={props.photoUser} alt=""/></div>
+                    ? <div className={headStyle.userAvatar}>
+                        <strong className={headStyle.userLogin}>{props.login}</strong>
+                        <img className={headStyle.userImg} src={props.photoUser || logodefault} alt=""/>
+                        <button onClick={props.loginOutFormMe} className="button">Log Out</button>
+                    </div>
+
                     : <NavLink className={headStyle.sing_button} to="/login">
                         <button className="button">Sign In</button>
                     </NavLink>}

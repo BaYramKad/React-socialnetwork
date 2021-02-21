@@ -1,8 +1,9 @@
 import React from "react"
-import {addMessage, updateTextMessage} from "../../redux/dialogsReduser";
+import {addMessage} from "../../redux/dialogsReduser";
 import DialogsBlock from "./DialogsBlock";
 import {connect} from "react-redux";
 import withOrderComponent from "../Redirect/RedirectComponent";
+import {getDialogsItems, getMessages, getTextPost} from "../../Selector/dialogsBlockSelector";
 // const DialogsBlockContainer = () => {
 
 //     return <MyContext.Consumer>
@@ -30,10 +31,9 @@ class getDialogsComponent extends React.Component {
 }
 const mapStateToProps = (state) => {
     return {
-        dialogMap: state.dialogs.dialogsItems,
-        messageMap: state.dialogs.messagesItems,
-        textAreaDialog: state.dialogs.textMessage,
-        isAuth: state.auth.isAuth
+        dialogMap: getDialogsItems(state),
+        messageMap: getMessages(state),
+        textAreaDialog: getTextPost(state),
     }
 }
 const mapDispatchToProps = (dispatch) => {
