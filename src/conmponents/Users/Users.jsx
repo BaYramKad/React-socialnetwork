@@ -4,21 +4,28 @@ import * as React from "react";
 import Preloader from "./Preloader/Preloader";
 import {NavLink} from "react-router-dom";
 
-const Users = (props) => {
-
-    const pages = Math.ceil(props.totalUsersCount / props.countUser)
+const Users = ({
+                   users,
+                   totalUsersCount,
+                   countUser,
+                   preloader,
+                   disableProgress,
+                   onPageChanged,
+                   currentPage,
+                   thunkUnFolow,
+                   thunkFolow
+               }) => {
+    const pages = Math.ceil(totalUsersCount / countUser)
     const page = []
-
     for (let i = 1; i <= pages; i++) {
         page.push(i)
     }
-
     return <div>
         <h1 className={usersStyle.title_h1}>Users</h1>
-        <Preloader preloader={props.preloader}/>
+        <Preloader preloader={preloader}/>
 
         {
-            props.users.map(item => (
+            users.map(item => (
                 <section className={usersStyle.content}>
                     <div className={usersStyle.infoUser}>
                         <NavLink to={`profile/${item.id}`}>
@@ -27,11 +34,11 @@ const Users = (props) => {
                         </NavLink>
                         {
                             item.followed ?
-                                <button disabled={props.disableProgress.some(i => i === item.id)} onClick={() => {
-                                    props.thunkUnFolow(item.id)
+                                <button disabled={disableProgress.some(i => i === item.id)} onClick={() => {
+                                    thunkUnFolow(item.id)
                                 }} className="button button_unfolow">Unfolow</button>
-                                : <button disabled={props.disableProgress.some(i => i === item.id)} onClick={() => {
-                                    props.thunkFolow(item.id)
+                                : <button disabled={disableProgress.some(i => i === item.id)} onClick={() => {
+                                    thunkFolow(item.id)
                                 }} className="button">Folow</button>
                         }
                     </div>
@@ -48,19 +55,14 @@ const Users = (props) => {
                 </section>
             ))
         }
-
-        <Preloader preloader={props.preloader}/>
+        <Preloader preloader={preloader}/>
         <div className={usersStyle.pag_content}>
             <div className={usersStyle.pag_block}>
-
-                {
-                    page.map(item => {
-                        return <span onClick={() => props.onPageChanged(item)}
-                                     className={props.currentPage === item && usersStyle.pagination}>{item}</span>
-                    })
-                }
+                {page.map(item => {
+                    return <span onClick={() => onPageChanged(item)}
+                                 className={currentPage === item && usersStyle.pagination}>{item}</span>
+                })}
             </div>
-
         </div>
     </div>
 }

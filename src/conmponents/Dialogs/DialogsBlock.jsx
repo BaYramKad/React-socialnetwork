@@ -7,28 +7,28 @@ import {maxLenght10, requireForm} from "../../validate/validateForm";
 import {TextAria} from "../../validate/ShowValidate";
 
 const DialogsBlock = (props) => {
-    const dialogMap = props.dialogMap.map(item => <Dialog userImage={item.userImage} name={item.name} id={`/dialogs/${item.id}`}/>)
-    const messageMap = props.messageMap.map(item => <Message message={item.message}/>)
+    const dialogMap = props.dialogMap.map(item => <Dialog key={item.id} userImage={item.userImage} name={item.name} id={`/dialogs/${item.id}`}/>)
+    const messageMap = props.messageMap.map(item => <Message key={item.id} message={item.message}/>)
 
     const onSubmit = (text) => {
         props.addMessage(text.messaggeText)
     }
-
     return (<div className={dialogsStyle.dialogs_block}>
-            <div className={dialogsStyle.scope}>
-                <ul>
-                    {dialogMap}
-                </ul>
-            </div>
-            <div className={dialogsStyle.messages}>
-                {messageMap}
-                <SendMessageReduxForm {...props} onSubmit={onSubmit}/>
-            </div>
-        </div>)
+        <div className={dialogsStyle.scope}>
+            <ul>
+                {dialogMap}
+            </ul>
+        </div>
+        <div className={dialogsStyle.messages}>
+            {messageMap}
+            <SendMessageReduxForm {...props} onSubmit={onSubmit}/>
+        </div>
+    </div>)
 }
 
 
 const maxLenght = maxLenght10(30)
+
 const SendMessage = (props) => {
     return <form onSubmit={props.handleSubmit} className={dialogsStyle.sendMessage}>
         <Field name="messaggeText" component={TextAria}

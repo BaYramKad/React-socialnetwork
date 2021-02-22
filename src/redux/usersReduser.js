@@ -1,5 +1,5 @@
 import {getApiData} from "../api/api";
-import {act} from "@testing-library/react";
+import {funcMapUsers} from "../util/FolowUnfolow";
 
 const folowType = "FOLOW";
 const unfolow = "UNFOLOW";
@@ -22,22 +22,12 @@ const usersReduser = (state = initialState, action) => {
         case folowType:
             return {
                 ...state,
-                users: state.users.map(item => {
-                    if (action.userId === item.id) {
-                        return {...item, followed: true}
-                    }
-                    return item
-                })
+                users: funcMapUsers(state.users, action.userId, "id", {followed: true})
             }
         case unfolow:
             return {
                 ...state,
-                users: state.users.map(item => {
-                    if (action.userId === item.id) {
-                        return {...item, followed: false}
-                    }
-                    return item
-                })
+                users: funcMapUsers(state.users, action.userId, "id", {followed: false})
             }
         case usersType:
             return {...state, users: [...action.users]}
@@ -68,50 +58,39 @@ const toggleIsDisabledProgress = (isDisabled, userId) => ({
     userId
 })
 
-
-export const thunkFolow = (userId) => (dispatch) => {
+const folowOrUnfolow = async (dispatch, userId, actionCreator, requestSub) => {
     dispatch(toggleIsDisabledProgress(true, userId))
-    getApiData.postFollow(userId).then(response => {
-        if (response === 0) {
-            dispatch(folow(userId))
-            dispatch(toggleIsDisabledProgress(false, userId))
-        }
-    })
+    const response = await requestSub(userId)
+    if (response === 0) {
+        dispatch(actionCreator(userId))
+        dispatch(toggleIsDisabledProgress(false, userId))
+    }
 }
 
- export const thunkUnFolow = (userId) => (dispatch) => {
-    dispatch(toggleIsDisabledProgress(true, userId))
-    getApiData.deleteFolow(userId).then(response => {
-        if (response === 0) {
-            dispatch(unFolow(userId))
-            dispatch(toggleIsDisabledProgress(false, userId))
-        }
-    })
+export const thunkFolow = (userId) => async (dispatch) => {
+    folowOrUnfolow(dispatch, userId, folow, getApiData.postFollow)
 }
 
-export const toggleThunkIsFetching = (countUser, currentPage) => (dispatch) => {
+export const thunkUnFolow = (userId) => async (dispatch) => {
+    folowOrUnfolow(dispatch, userId, unFolow, getApiData.deleteFolow)
+}
+
+const usersToggle = async (dispatch, countUser, currentPage, actionCreator) => {
     dispatch(toggleIsFetching(true))
-    getApiData.getUsers(countUser, currentPage)
-        .then( items => {
-            dispatch(toggleIsFetching(false))
-            dispatch(setUsers(items))
-        })
+    const items = await getApiData.getUsers(countUser, currentPage)
+    dispatch(toggleIsFetching(false))
+    dispatch(setUsers(items))
+    if (actionCreator) dispatch(actionCreator(currentPage))
 }
 
-export const toggleThunkIsPage = (countUser, currentPage) => (dispatch) => {
-    dispatch(toggleIsFetching(true))
-    getApiData.getUsers(countUser, currentPage)
-        .then( items => {
-            dispatch(toggleIsFetching(false))
-            dispatch(setUsers(items))
-            dispatch(setPage(currentPage))
-        })
+export const toggleThunkIsFetching = (countUser, currentPage) => async (dispatch) => {
+    usersToggle(dispatch, countUser, currentPage)
 }
 
-
-
-
-
+export const toggleThunkIsPage = (countUser, currentPage) => async (dispatch) => {
+    const actionCreator = setPage
+    usersToggle(dispatch, countUser, currentPage, actionCreator)
+}
 
 
 export default usersReduser;

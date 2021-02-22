@@ -6,8 +6,8 @@ export const getUsersPageSelector = (state) => {
 
 export const getUsersPage = createSelector(
     getUsersPageSelector,
-    (users) => {
-    return users.filter((item) => item)
+    (state) => {
+    return state.map((item) => item)
 })
 
 export const getTotalUsersCount = (state) => {

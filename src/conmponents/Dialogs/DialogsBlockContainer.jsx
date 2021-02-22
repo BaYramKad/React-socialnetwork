@@ -4,48 +4,20 @@ import DialogsBlock from "./DialogsBlock";
 import {connect} from "react-redux";
 import withOrderComponent from "../Redirect/RedirectComponent";
 import {getDialogsItems, getMessages, getTextPost} from "../../Selector/dialogsBlockSelector";
-// const DialogsBlockContainer = () => {
 
-//     return <MyContext.Consumer>
-//         { (store) => {
-//             console.log(store);
-//             const storeAppeal = store.appeal()
-//             const dialog = storeAppeal.dialogsPage.dialogsItems.map( item => <Dialog userImage={item.userImage} name={item.name} id={`/dialogs/${item.id}`}/> );
-//             const message = storeAppeal.dialogsPage.messagesItems.map( item => <Message message={item.message}/> );
-//             const addMessage = () => {
-//                 store.dispatch(TYPE_ADD_MESSAGE());
-//             };
-//             const onChangeMessage = (e) => {
-//                 store.dispatch(TYPE_UPDATE_TEXT_MESSAGE(e.target.value))
-//             }
-//             return <DialogsBlock onChangeMessage={onChangeMessage} addMessage={addMessage}
-//             dialogMap={dialog} messageMap={message}
-//             textAreaDialog={storeAppeal.dialogsPage.textMessage} />
-//         }}
-//     </MyContext.Consumer>
-// }
 class getDialogsComponent extends React.Component {
     render() {
-
         return <DialogsBlock {...this.props} />
     }
 }
-const mapStateToProps = (state) => {
 
+const mapStateToProps = (state) => {
     return {
         dialogMap: getDialogsItems(state),
         messageMap: getMessages(state),
         textAreaDialog: getTextPost(state),
     }
 }
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addMessage: (text) => {
-            dispatch(addMessage(text))
-        }
-    }
-}
-// Hight Order Component
-const HightOrderComponent = withOrderComponent(getDialogsComponent)
 
-export default connect(mapStateToProps, mapDispatchToProps)(HightOrderComponent)
+const HightOrderComponent = withOrderComponent(getDialogsComponent)
+export default connect(mapStateToProps, {addMessage})(HightOrderComponent)
