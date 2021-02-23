@@ -14,11 +14,11 @@ const Header = (props) => {
                     ? <div className={headStyle.userAvatar}>
                         <strong className={headStyle.userLogin}>{props.login}</strong>
                         <img className={headStyle.userImg} src={props.photoUser || logodefault} alt=""/>
-                        <button onClick={props.loginOutFormMe} className="button">Log Out</button>
+                        <button onClick={props.loginOutFormMe} className={headStyle.button_login} >Log Out</button>
                     </div>
 
                     : <NavLink className={headStyle.sing_button} to="/login">
-                        <button className="button">Sign In</button>
+                        <button className={headStyle.button_login} >Sign In</button>
                     </NavLink>}
             </div>
         </header>

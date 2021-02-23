@@ -58,7 +58,6 @@
 .postTextAria {
   font-family: Segoe UI, "Tahoma", Geneva, Verdana, sans-serif;
   outline: none;
-  border: none;
   background-color: #70ffc145;
   border: 3px solid #8fd8b845;
   width: 700px;
@@ -67,11 +66,12 @@
   resize: none;
 }
 
-
-
 .contacts_networks a {
   display: flex;
   justify-content: flex-end;
+}
+.title {
+  margin-bottom: 15px;
 }
 .status {
   font-family: Segoe UI, "Tahoma", Geneva, Verdana, sans-serif;
@@ -80,12 +80,16 @@
   resize: none;
   border-radius: 2px;
   border: 0;
+  transition: 0.5s;
 }
 
 .status:hover {
+  transition: 0.5s;
   cursor: pointer;
-  background-color: #ccc;
+  background-color: #508e9621;
+  border-radius: 3px;
 }
+
 .inputProfile {
   font-family: Segoe UI, "Tahoma", Geneva, Verdana, sans-serif;
   outline: none;

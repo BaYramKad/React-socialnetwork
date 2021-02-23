@@ -24,7 +24,7 @@ const Profile = (props) => {
             </div>
             <div className={profileStyle.position}>
                 <div>
-                    <h1>My Posts</h1>
+                    <h1 className={profileStyle.title}>My Posts</h1>
                     <ProfilePostReduxForm {...props} onSubmit={onSubmit}/>
                 </div>
                 <Post postInfo={props.postInfo}/>
