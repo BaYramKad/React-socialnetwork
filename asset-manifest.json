@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/BaYramKad/React-socialnetwork/static/css/main.8d298aab.chunk.css",
+    "main.js": "/BaYramKad/React-socialnetwork/static/js/main.623afd58.chunk.js",
+    "main.js.map": "/BaYramKad/React-socialnetwork/static/js/main.623afd58.chunk.js.map",
+    "runtime-main.js": "/BaYramKad/React-socialnetwork/static/js/runtime-main.6f108def.js",
+    "runtime-main.js.map": "/BaYramKad/React-socialnetwork/static/js/runtime-main.6f108def.js.map",
+    "static/js/2.96f085bd.chunk.js": "/BaYramKad/React-socialnetwork/static/js/2.96f085bd.chunk.js",
+    "static/js/2.96f085bd.chunk.js.map": "/BaYramKad/React-socialnetwork/static/js/2.96f085bd.chunk.js.map",
+    "static/js/3.97c7f00d.chunk.js": "/BaYramKad/React-socialnetwork/static/js/3.97c7f00d.chunk.js",
+    "static/js/3.97c7f00d.chunk.js.map": "/BaYramKad/React-socialnetwork/static/js/3.97c7f00d.chunk.js.map",
+    "index.html": "/BaYramKad/React-socialnetwork/index.html",
+    "static/css/main.8d298aab.chunk.css.map": "/BaYramKad/React-socialnetwork/static/css/main.8d298aab.chunk.css.map",
+    "static/js/2.96f085bd.chunk.js.LICENSE.txt": "/BaYramKad/React-socialnetwork/static/js/2.96f085bd.chunk.js.LICENSE.txt",
+    "static/media/foods_person.8d2a7bfc.jpg": "/BaYramKad/React-socialnetwork/static/media/foods_person.8d2a7bfc.jpg",
+    "static/media/girl.1f140317.jpg": "/BaYramKad/React-socialnetwork/static/media/girl.1f140317.jpg",
+    "static/media/keanu_reeves.54e8eb5b.jpg": "/BaYramKad/React-socialnetwork/static/media/keanu_reeves.54e8eb5b.jpg",
+    "static/media/logo.6ce24c58.svg": "/BaYramKad/React-socialnetwork/static/media/logo.6ce24c58.svg",
+    "static/media/preloader.738a5943.svg": "/BaYramKad/React-socialnetwork/static/media/preloader.738a5943.svg",
+    "static/media/woman.b628b66d.jpg": "/BaYramKad/React-socialnetwork/static/media/woman.b628b66d.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6f108def.js",
+    "static/js/2.96f085bd.chunk.js",
+    "static/css/main.8d298aab.chunk.css",
+    "static/js/main.623afd58.chunk.js"
+  ]
+}
