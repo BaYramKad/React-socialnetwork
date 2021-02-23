@@ -2,9 +2,9 @@ import messageStyle from "./messageStyle.module.css";
 
 const Message = (props) => {
     return (
-        <div>
+        <li key={props.idkey}>
             <div className={messageStyle.message}>{props.message}</div>
-        </div>
+        </li>
     )
 }
 
